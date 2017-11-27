@@ -36,6 +36,17 @@ class ArticleViewController: UIViewController {
         ArticleAPIClient.manager.getArticles(from: urlStr, completionHandler: completion, errorHandler: {print($0)})
     }
     
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if
+            let cell = sender as? UITableViewCell,
+            let currentIndexPath = tableView.indexPath(for: cell),
+            let destinationVC = segue.destination as? ArticleDetailViewController {
+            let currentArticle = articles[currentIndexPath.row]
+            destinationVC.article = currentArticle
+        }
+    }
+    
 }
 
 //MARK: - Table View Data Source Methods
